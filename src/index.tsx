@@ -7,24 +7,23 @@ import 'bootstrap/dist/css//bootstrap.min.css';
 
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { logReducer } from './components/reducers/reducer'
+import { createStore, applyMiddleware } from 'redux';
+import user  from './components/reducers/';
 import { Router, Route, browserHistory} from 'react-router';
+
 
 import Login from './components/pages/login';
 import Register from './components/pages/register';
 import LoggedIn from './components/pages/loggedIn';
 
-
-
 const middleWarestore = applyMiddleware(thunk)(createStore);
-const store = middleWarestore(logReducer);
+const store = middleWarestore(user);
 
-function checkAuth(nextState: any, replaceState: any){
+function checkAuth(nextState, replaceState) {
   let { logged } = store.getState();
 
-  if(nextState.location.pathname !== '/loggedIn'){
-    if(logged){
+  if(nextState.location.pathname !== '/loggedIn') {
+    if(logged) {
       if(nextState.location.state && nextState.location.pathname) {
         replaceState(null, nextState.location.pathname);
       }else{
@@ -47,5 +46,3 @@ function checkAuth(nextState: any, replaceState: any){
     </Provider>,
     document.getElementById('root') as HTMLElement
   );
-
- 

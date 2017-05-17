@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Form from './components/wrappers/Form';
 import './App.css';
 
 

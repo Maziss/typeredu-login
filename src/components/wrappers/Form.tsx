@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Input from './../comp/Input';
+import { Form } from 'reactstrap';
 
 
 
 
-
-class Form extends React.Component<any, {}> {
+class FormWrapper extends React.Component<any, {}> {
     
 
     constructor(props: any) {
@@ -17,7 +17,7 @@ class Form extends React.Component<any, {}> {
    render(){ 
    
         return(
-        <form>
+        <Form>
             <Input type="text" name="username" autoComplete="off" />
             <br />
             <Input type="password" name="password" autoComplete="off" />
@@ -25,12 +25,12 @@ class Form extends React.Component<any, {}> {
             <Input type="password" name="password-re" autoComplete="off" />
             <br />
             <input type="submit" value="submit" /> 
-        </form>
+        </Form>
     
     
     )}
 
 }
 
-export default Form;
+export default FormWrapper;
 
