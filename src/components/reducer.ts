@@ -1,15 +1,18 @@
-import {SET_AUTH, CHANGE_FROM, SENDING_REQUEST, ERROR_RECEIVED, LOGIN_SUCCES} from '../constants/constants';
-import * as errors from '../constants/errors';
 import * as Immutable from 'immutable'
 
-let initialState = new Immutable.map({
+const LOGIN_SUCCES = 'LOGIN_SUCCES';
+const SENDING_REQUEST = 'SENDING_REGUEST';
+const ERROR_RECEIVED = 'ERROR_RECEIVED';
+const MISSING_FIELD = 'Some of the fields are empty';
+
+const initialState = Immutable.Map({
     username: '',
     password: '',
     sendingRequest: false,
     isLogged: false
 });
 
-const user = (state = initialState, action) => {
+export const user = (state = initialState, action) => {
     switch (action.type) {
         case SENDING_REQUEST:
         return state.merge({
@@ -20,7 +23,7 @@ const user = (state = initialState, action) => {
         });
         case ERROR_RECEIVED:
         return state.merge({
-            error: errors.MISSING_FIELD,
+            error: MISSING_FIELD,
             sendingRequest: false,
             isLogged: false
         });
@@ -35,7 +38,3 @@ const user = (state = initialState, action) => {
 
     }
 }
-
-
-
-export default user;

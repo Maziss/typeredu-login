@@ -8,13 +8,14 @@ import 'bootstrap/dist/css//bootstrap.min.css';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import user  from './components/reducers/';
-import { Router, Route, browserHistory} from 'react-router';
-
+import {BrowserRouter, Route} from 'react-router-dom';
+import { user } from './components/reducer';
 
 import Login from './components/pages/login';
 import Register from './components/pages/register';
 import LoggedIn from './components/pages/loggedIn';
+
+
 
 const middleWarestore = applyMiddleware(thunk)(createStore);
 const store = middleWarestore(user);
@@ -35,14 +36,14 @@ function checkAuth(nextState, replaceState) {
 
   ReactDOM.render(
     <Provider store={store}>
-     <Router history={browserHistory}>
-       <Route component={App}>
+      <BrowserRouter>
+       <App>
           <Route onEnter={checkAuth} />
-          <Route path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/loggedIn" component={LoggedIn} />
-       </Route>
-      </Router>
+       </App>
+     </BrowserRouter>
     </Provider>,
     document.getElementById('root') as HTMLElement
   );
