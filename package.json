@@ -10,10 +10,11 @@
   "dependencies": {
     "@types/immutable": "^3.8.7",
     "@types/jest": "^19.2.3",
-    "@types/node": "^7.0.18",
+    "@types/node": "^7.0.21",
     "@types/react": "^15.0.24",
     "@types/react-dom": "^15.5.0",
     "@types/react-redux": "^4.4.40",
+    "@types/redux-thunk": "^2.1.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.0.0-alpha.6",
     "firebase": "^3.9.0",

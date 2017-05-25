@@ -8,8 +8,8 @@ const MISSING_FIELD = 'Some of the fields are empty';
 const initialState = Immutable.Map({
     username: '',
     password: '',
-    sendingRequest: false,
-    isLogged: false
+    isFetching: false,
+    idAuthenticated: false
 });
 
 export const user = (state = initialState, action) => {
@@ -18,20 +18,20 @@ export const user = (state = initialState, action) => {
         return state.merge({
             email: action.username,
             password: action.password,
-            sendingRequest: true,
-            isLogged:false,
+            isFetching: true,
+            idAuthenticated:false,
         });
         case ERROR_RECEIVED:
         return state.merge({
             error: MISSING_FIELD,
-            sendingRequest: false,
-            isLogged: false
+            isFetching: false,
+            idAuthenticated: false
         });
         case LOGIN_SUCCES:
         return state.merge({
             error: null,
-            sendingRequest: false,
-            isLogged:true
+            isFetching: false,
+            idAuthenticated:true
         });
         default:
         return state;

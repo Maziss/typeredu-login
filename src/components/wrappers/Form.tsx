@@ -1,36 +1,55 @@
 import * as React from 'react';
 import Input from './../comp/Input';
-import { Form } from 'reactstrap';
+import { Form, Button } from 'reactstrap';
 
 
+interface FormState {values: {username: string, password: string}}
 
-
-class FormWrapper extends React.Component<any, {}> {
+class FormWrapper extends React.Component<any, FormState> {
     
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);  
+        this.state = {
+            values: {
+                username: '',
+                password: ''
+            }
+        }
+
     }
 
+    handleClick(event: any){
+        event.preventDefault();
+        this.props.actions.sendingRequest(this.state.values);
+        console.log("Clicked");
+    }
+
+    handleChange(event: any){
+        const field = event.target.name;
+        const credintials = this.state.values
+        credintials[field] = event.target.value;
+        return this.setState({values: credintials});
+
+    }
    
    // tslint:disable-next-line:one-line
    render(){ 
    
         return(
         <Form>
-            <Input type="text" name="username" autoComplete="off" />
+            <Input value={this.state.values.username} type="text" name="username" autoComplete="off" handleChange={(e) => this.handleChange(e)}/>
             <br />
-            <Input type="password" name="password" autoComplete="off" />
+            <Input value={this.state.values.password} type="password" name="password" autoComplete="off" handleChange={(e) => this.handleChange(e)} />
             <br />
-            <Input type="password" name="password-re" autoComplete="off" />
-            <br />
-            <input type="submit" value="submit" /> 
+            <Button outline color="primary" onClick={(e) => this.handleClick(e)}>Submit</Button>
         </Form>
     
     
     )}
 
 }
+
 
 export default FormWrapper;
 

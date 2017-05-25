@@ -8,8 +8,9 @@ import 'bootstrap/dist/css//bootstrap.min.css';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import {BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { user } from './components/reducer';
+
 
 import Login from './components/pages/login';
 import Register from './components/pages/register';
@@ -21,29 +22,27 @@ const middleWarestore = applyMiddleware(thunk)(createStore);
 const store = middleWarestore(user);
 
 function checkAuth(nextState, replaceState) {
-  let { logged } = store.getState();
-
+  console.log("auth going on");
   if(nextState.location.pathname !== '/loggedIn') {
-    if(logged) {
+    
       if(nextState.location.state && nextState.location.pathname) {
         replaceState(null, nextState.location.pathname);
       }else{
         replaceState(null, '/');
       }
-    }
   }
 }
 
   ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <Router>
        <App>
           <Route onEnter={checkAuth} />
           <Route exact path="/" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/loggedIn" component={LoggedIn} />
        </App>
-     </BrowserRouter>
+     </Router>
     </Provider>,
     document.getElementById('root') as HTMLElement
   );
